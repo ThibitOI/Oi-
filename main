@@ -1,0 +1,13 @@
+public class main
+{
+    public static void main()
+    {
+        LunchAccount Alice = new LunchAccount(-4, 13421);
+        
+        Alice.buyLunch(1);
+        Alice.refreshFunds(30);
+        Alice.lendMoney(5);
+        Alice.closeAccount();
+        Alice.buyLunch(1.50);
+    }
+}
