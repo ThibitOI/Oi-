@@ -1,0 +1,136 @@
+public class LunchAccount
+{
+    private double balance;
+    private int idNum;
+    private boolean value;
+    private boolean closed;
+    
+    public LunchAccount(double money, int num)
+    {
+        balance = money;
+        idNum = num;
+        if(balance > 50)
+        {
+            value = true;
+        }
+        else
+        {
+            value = false;
+        }
+        closed = false;
+    }
+    
+    public void checkValue()
+    {
+        if(balance > 50)
+        {
+            value = true;
+        }
+        else
+        {
+            value = false;
+        }
+    }
+    
+    public boolean buyLunch(double amount)
+    {
+        double newBal = balance - amount;
+        double discount = amount - amount/10;
+        if(value)
+        {
+            newBal = balance - discount;
+            balance = newBal;
+            System.out.println("Thank You! Now you have $" + balance);
+            return(true);
+        }
+        
+        if(newBal >= -5 && !closed)
+        {
+            balance = newBal;
+            checkValue();
+            System.out.println("Thank You! Now you have " + balance + " dollars");
+            return(true);
+        }
+        else
+        {
+            System.out.println("You cannot buy lunch today");
+            value = false;
+            return(false);
+        }
+    }
+    
+    public void refreshFunds(double amount)
+    {
+        double newBal = balance + amount;
+        
+        if(newBal > 50 && !closed)
+        {
+            value = true;
+            balance = newBal;
+            System.out.println("You have $" + balance);
+        }
+        else
+        {
+            if(!closed)
+            {
+                balance = newBal;
+                System.out.println("You have $" + balance);
+            }
+            else
+            {
+                System.out.println("Your account is closed");
+            }
+        }
+    }
+    
+    public void closeAccount()
+    {
+        if(balance > 0 && closed == false)
+        {
+            balance = 0;
+            idNum = -1;
+            closed = true;
+            value = false;
+             System.out.println("Your account is closed");
+        }
+        else
+        {
+            System.out.println("You owe money, your account may not be closed");
+        }
+    }
+    
+    public double lendMoney(double amount)
+    {
+        double lend = balance - amount;
+        if(!closed)
+        {
+            if(lend < 0)
+            {
+                lend = balance;
+            }
+            balance = lend;
+            System.out.println("You have lent a student $" + amount + ". Your new balance is $" + balance);
+            return(lend);
+        }
+        else
+        {
+            System.out.println("Your account is closed");
+        }
+        return(-1);
+    }
+    
+    public boolean getClosed()
+    {
+        return(closed);
+    }
+    
+    public double getBalance()
+    {
+        return(balance);
+    }
+    
+    public int getIdNum()
+    {
+        return(idNum);
+    }
+}
